@@ -1,0 +1,1862 @@
+openapi: 3.0.3
+info:
+  title: Preelly Marketplace API
+  description: >-
+    Complete REST API documentation for Preelly Marketplace - Social Commerce
+    Platform
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: http://localhost:5002
+paths:
+  /api/health:
+    get:
+      tags:
+        - Health & System
+      summary: Health Check
+      description: Health Check
+      operationId: healthCheck
+      responses:
+        '200':
+          description: ''
+  /api-docs:
+    get:
+      tags:
+        - Health & System
+      summary: Swagger UI
+      description: Swagger UI
+      operationId: swaggerUi
+      responses:
+        '200':
+          description: ''
+  /api-docs.json:
+    get:
+      tags:
+        - Health & System
+      summary: OpenAPI JSON
+      description: OpenAPI JSON
+      operationId: openapiJson
+      responses:
+        '200':
+          description: ''
+  /api/auth/register:
+    post:
+      tags:
+        - Authentication
+      summary: Register User
+      description: Register User
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: john@example.com
+                name:
+                  type: string
+                  example: John Doe
+                password:
+                  type: string
+                  example: password123
+                phone:
+                  type: string
+                  example: '+971500000001'
+            examples:
+              Register User:
+                value:
+                  email: john@example.com
+                  name: John Doe
+                  password: password123
+                  phone: '+971500000001'
+      responses:
+        '200':
+          description: ''
+  /api/auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: Login
+      description: Login
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: john@example.com
+                password:
+                  type: string
+                  example: password123
+            examples:
+              Login:
+                value:
+                  email: john@example.com
+                  password: password123
+      responses:
+        '200':
+          description: ''
+  /api/auth/send-email-otp:
+    post:
+      tags:
+        - Authentication
+      summary: Send Email OTP
+      description: Send Email OTP
+      operationId: sendEmailOtp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: john@example.com
+            examples:
+              Send Email OTP:
+                value:
+                  email: john@example.com
+      responses:
+        '200':
+          description: ''
+  /api/auth/verify-email-otp:
+    post:
+      tags:
+        - Authentication
+      summary: Verify Email OTP
+      description: Verify Email OTP
+      operationId: verifyEmailOtp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: john@example.com
+                otp:
+                  type: string
+                  example: '123456'
+            examples:
+              Verify Email OTP:
+                value:
+                  email: john@example.com
+                  otp: '123456'
+      responses:
+        '200':
+          description: ''
+  /api/auth/logout:
+    post:
+      tags:
+        - Authentication
+      summary: Logout
+      description: Logout
+      operationId: logout
+      responses:
+        '200':
+          description: ''
+  /api/auth/oauth/google:
+    get:
+      tags:
+        - Authentication
+      summary: OAuth Google
+      description: OAuth Google
+      operationId: oauthGoogle
+      responses:
+        '200':
+          description: ''
+  /api/auth/oauth/facebook:
+    get:
+      tags:
+        - Authentication
+      summary: OAuth Facebook
+      description: OAuth Facebook
+      operationId: oauthFacebook
+      responses:
+        '200':
+          description: ''
+  /api/user/me:
+    get:
+      tags:
+        - User Profile
+      summary: Get Current User
+      description: Get Current User
+      operationId: getCurrentUser
+      responses:
+        '200':
+          description: ''
+  /api/user/profile:
+    put:
+      tags:
+        - User Profile
+      summary: Update User Profile
+      description: Update User Profile
+      operationId: updateUserProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: object
+                  properties:
+                    country:
+                      type: string
+                      example: AE
+                    line1:
+                      type: string
+                      example: Dubai Marina
+                displayName:
+                  type: string
+                  example: Johnny
+                dob:
+                  type: string
+                  example: '1990-01-15'
+                gender:
+                  type: string
+                  example: male
+                name:
+                  type: string
+                  example: John Updated
+            examples:
+              Update User Profile:
+                value:
+                  address:
+                    country: AE
+                    line1: Dubai Marina
+                  displayName: Johnny
+                  dob: '1990-01-15'
+                  gender: male
+                  name: John Updated
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - User Profile
+      summary: Upload Profile Picture
+      description: Upload Profile Picture
+      operationId: uploadProfilePicture
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                profilePic:
+                  type: string
+                  format: binary
+                  example: ''
+      responses:
+        '200':
+          description: ''
+  /api/user/reels-progress:
+    put:
+      tags:
+        - User Profile
+      summary: Update Reels Progress
+      description: Update Reels Progress
+      operationId: updateReelsProgress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                feedKey:
+                  type: string
+                  example: default
+                index:
+                  type: number
+                  example: 5
+            examples:
+              Update Reels Progress:
+                value:
+                  feedKey: default
+                  index: 5
+      responses:
+        '200':
+          description: ''
+  /api/user/{id}:
+    get:
+      tags:
+        - User Profile
+      summary: Get User by ID
+      description: Get User by ID
+      operationId: getUserById
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/products:
+    get:
+      tags:
+        - Products / Listings
+      summary: Get All Products
+      description: Get All Products
+      operationId: getAllProducts
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: string
+            example: '10'
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Products / Listings
+      summary: Create Product
+      description: Create Product
+      operationId: createProduct
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: string
+                  example: Motors
+                condition:
+                  type: string
+                  example: Used
+                currency:
+                  type: string
+                  example: AED
+                description:
+                  type: string
+                  example: Excellent condition, low mileage
+                location:
+                  type: string
+                  example: Dubai
+                price:
+                  type: string
+                  example: '85000'
+                title:
+                  type: string
+                  example: 2023 Toyota Camry
+                video:
+                  type: string
+                  format: binary
+                  example: ''
+      responses:
+        '200':
+          description: ''
+  /api/products/{id}:
+    get:
+      tags:
+        - Products / Listings
+      summary: Get Product by ID
+      description: Get Product by ID
+      operationId: getProductById
+      responses:
+        '200':
+          description: ''
+    put:
+      tags:
+        - Products / Listings
+      summary: Update Product
+      description: Update Product
+      operationId: updateProduct
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                price:
+                  type: string
+                  example: '82000'
+                title:
+                  type: string
+                  example: 2023 Toyota Camry - Updated
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+        - Products / Listings
+      summary: Delete Product
+      description: Delete Product
+      operationId: deleteProduct
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/products/{id}/resubmit:
+    put:
+      tags:
+        - Products / Listings
+      summary: Resubmit Rejected Product
+      description: Resubmit Rejected Product
+      operationId: resubmitRejectedProduct
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/products/user/{userId}:
+    get:
+      tags:
+        - Products / Listings
+      summary: Get User Products
+      description: Get User Products
+      operationId: getUserProducts
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/products/{id}/like:
+    post:
+      tags:
+        - Product Interactions
+      summary: Like Product
+      description: Like Product
+      operationId: likeProduct
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+        - Product Interactions
+      summary: Unlike Product
+      description: Unlike Product
+      operationId: unlikeProduct
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/products/{id}/save:
+    post:
+      tags:
+        - Product Interactions
+      summary: Save Product
+      description: Save Product
+      operationId: saveProduct
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+        - Product Interactions
+      summary: Unsave Product
+      description: Unsave Product
+      operationId: unsaveProduct
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/products/{id}/view:
+    post:
+      tags:
+        - Product Interactions
+      summary: View Product
+      description: View Product
+      operationId: viewProduct
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/products/{id}/report:
+    post:
+      tags:
+        - Product Interactions
+      summary: Report Product
+      description: Report Product
+      operationId: reportProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  example: This listing is misleading
+                reason:
+                  type: string
+                  example: spam
+            examples:
+              Report Product:
+                value:
+                  description: This listing is misleading
+                  reason: spam
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/products/{id}/comments:
+    get:
+      tags:
+        - Comments
+      summary: Get Product Comments
+      description: Get Product Comments
+      operationId: getProductComments
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Comments
+      summary: Add Comment
+      description: Add Comment
+      operationId: addComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  example: Great product! How old is it?
+            examples:
+              Add Comment:
+                value:
+                  text: Great product! How old is it?
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/comments/{id}:
+    delete:
+      tags:
+        - Comments
+      summary: Delete Comment
+      description: Delete Comment
+      operationId: deleteComment
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/comments/{id}/like:
+    post:
+      tags:
+        - Comments
+      summary: Like Comment
+      description: Like Comment
+      operationId: likeComment
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/comments/{id}/report:
+    post:
+      tags:
+        - Comments
+      summary: Report Comment
+      description: Report Comment
+      operationId: reportComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  example: spam
+            examples:
+              Report Comment:
+                value:
+                  reason: spam
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/user/{id}/follow:
+    post:
+      tags:
+        - User Interactions
+      summary: Follow User
+      description: Follow User
+      operationId: followUser
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+        - User Interactions
+      summary: Unfollow User
+      description: Unfollow User
+      operationId: unfollowUser
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/user/{id}/followers:
+    get:
+      tags:
+        - User Interactions
+      summary: Get User Followers
+      description: Get User Followers
+      operationId: getUserFollowers
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/user/{id}/following:
+    get:
+      tags:
+        - User Interactions
+      summary: Get User Following
+      description: Get User Following
+      operationId: getUserFollowing
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/chats:
+    get:
+      tags:
+        - Chats & Messaging
+      summary: Get All Chats
+      description: Get All Chats
+      operationId: getAllChats
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Chats & Messaging
+      summary: Create Product Chat
+      description: Create Product Chat
+      operationId: createProductChat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: support
+            examples:
+              Create Product Chat:
+                value:
+                  productId: 507f1f77bcf86cd799439011
+                  sellerId: 507f1f77bcf86cd799439012
+              Create Support Chat:
+                value:
+                  type: support
+      responses:
+        '200':
+          description: ''
+  /api/chats/{id}/messages:
+    get:
+      tags:
+        - Chats & Messaging
+      summary: Get Chat Messages
+      description: Get Chat Messages
+      operationId: getChatMessages
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Chats & Messaging
+      summary: Send Message
+      description: Send Message
+      operationId: sendMessage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  example: Hello, is this still available?
+            examples:
+              Send Message:
+                value:
+                  text: Hello, is this still available?
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/chats/{id}/read:
+    put:
+      tags:
+        - Chats & Messaging
+      summary: Mark Messages as Read
+      description: Mark Messages as Read
+      operationId: markMessagesAsRead
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/chats/unread/count:
+    get:
+      tags:
+        - Chats & Messaging
+      summary: Get Unread Count
+      description: Get Unread Count
+      operationId: getUnreadCount
+      responses:
+        '200':
+          description: ''
+  /api/ai/enhance-description:
+    post:
+      tags:
+        - AI & Video Processing
+      summary: Enhance Description
+      description: Enhance Description
+      operationId: enhanceDescription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: string
+                  example: Motors
+                description:
+                  type: string
+                  example: Good car, well maintained
+                title:
+                  type: string
+                  example: Used Sedan
+            examples:
+              Enhance Description:
+                value:
+                  category: Motors
+                  description: Good car, well maintained
+                  title: Used Sedan
+      responses:
+        '200':
+          description: ''
+  /api/listings/ai-extract:
+    post:
+      tags:
+        - AI & Video Processing
+      summary: AI Extract Listing Info
+      description: AI Extract Listing Info
+      operationId: aiExtractListingInfo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input_text:
+                  type: string
+                  example: 2020 Toyota Camry, 45000 km, AED 45000, excellent condition
+            examples:
+              AI Extract Listing Info:
+                value:
+                  input_text: 2020 Toyota Camry, 45000 km, AED 45000, excellent condition
+      responses:
+        '200':
+          description: ''
+  /api/video/transcribe:
+    post:
+      tags:
+        - AI & Video Processing
+      summary: Transcribe Video
+      description: Transcribe Video
+      operationId: transcribeVideo
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: string
+                  example: Motors
+                video:
+                  type: string
+                  format: binary
+                  example: ''
+      responses:
+        '200':
+          description: ''
+  /api/video/screenshot:
+    post:
+      tags:
+        - AI & Video Processing
+      summary: Capture Video Screenshot
+      description: Capture Video Screenshot
+      operationId: captureVideoScreenshot
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                timestamp:
+                  type: string
+                  example: '2.5'
+                video:
+                  type: string
+                  format: binary
+                  example: ''
+      responses:
+        '200':
+          description: ''
+  /api/admin/products:
+    get:
+      tags:
+        - Admin - Products Management
+      summary: Get All Products (Admin)
+      description: Get All Products (Admin)
+      operationId: getAllProductsAdmin
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            example: pending
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: string
+            example: '20'
+      responses:
+        '200':
+          description: ''
+  /api/admin/products/{id}/approve:
+    put:
+      tags:
+        - Admin - Products Management
+      summary: Approve Product
+      description: Approve Product
+      operationId: approveProduct
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/products/{id}/reject:
+    put:
+      tags:
+        - Admin - Products Management
+      summary: Reject Product
+      description: Reject Product
+      operationId: rejectProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customReason:
+                  type: string
+                  example: ''
+                reason:
+                  type: string
+                  example: Policy violation
+                reasons:
+                  type: array
+                  items:
+                    type: string
+                    example: Inappropriate content
+                  example:
+                    - Inappropriate content
+                rejectionCategories:
+                  type: array
+                  items:
+                    type: string
+                    example: Content
+                  example:
+                    - Content
+                rejectionCategory:
+                  type: string
+                  example: Content
+                rejectionSelections:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      category:
+                        type: string
+                        example: Content
+                      reasons:
+                        type: array
+                        items:
+                          type: string
+                          example: Inappropriate content
+                        example:
+                          - Inappropriate content
+                  example:
+                    - category: Content
+                      reasons:
+                        - Inappropriate content
+            examples:
+              Reject Product:
+                value:
+                  customReason: ''
+                  reason: Policy violation
+                  reasons:
+                    - Inappropriate content
+                  rejectionCategories:
+                    - Content
+                  rejectionCategory: Content
+                  rejectionSelections:
+                    - category: Content
+                      reasons:
+                        - Inappropriate content
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/products/{id}/status:
+    put:
+      tags:
+        - Admin - Products Management
+      summary: Update Product Status
+      description: Update Product Status
+      operationId: updateProductStatus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: active
+            examples:
+              Update Product Status:
+                value:
+                  status: active
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/users:
+    get:
+      tags:
+        - Admin - Users Management
+      summary: Get All Users
+      description: Get All Users
+      operationId: getAllUsers
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: string
+            example: '20'
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Admin - Users Management
+      summary: Create User (Admin)
+      description: Create User (Admin)
+      operationId: createUserAdmin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: newuser@example.com
+                name:
+                  type: string
+                  example: New User
+                password:
+                  type: string
+                  example: password123
+                phone:
+                  type: string
+                  example: '+971500000002'
+                role:
+                  type: string
+                  example: user
+                status:
+                  type: string
+                  example: active
+            examples:
+              Create User (Admin):
+                value:
+                  email: newuser@example.com
+                  name: New User
+                  password: password123
+                  phone: '+971500000002'
+                  role: user
+                  status: active
+      responses:
+        '200':
+          description: ''
+  /api/admin/users/{id}/verify:
+    put:
+      tags:
+        - Admin - Users Management
+      summary: Verify User
+      description: Verify User
+      operationId: verifyUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isVerified:
+                  type: boolean
+                  example: true
+            examples:
+              Verify User:
+                value:
+                  isVerified: true
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/users/{id}/role:
+    put:
+      tags:
+        - Admin - Users Management
+      summary: Update User Role
+      description: Update User Role
+      operationId: updateUserRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                  example: admin
+            examples:
+              Update User Role:
+                value:
+                  role: admin
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/users/{id}/status:
+    put:
+      tags:
+        - Admin - Users Management
+      summary: Update User Status
+      description: Update User Status
+      operationId: updateUserStatus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: inactive
+            examples:
+              Update User Status:
+                value:
+                  status: inactive
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/users/{id}:
+    delete:
+      tags:
+        - Admin - Users Management
+      summary: Delete User
+      description: Delete User
+      operationId: deleteUser
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/categories:
+    get:
+      tags:
+        - Admin - Categories
+      summary: Get All Categories
+      description: Get All Categories
+      operationId: getAllCategories
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Admin - Categories
+      summary: Create Category
+      description: Create Category
+      operationId: createCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isActive:
+                  type: boolean
+                  example: true
+                name:
+                  type: string
+                  example: Electronics
+                parentId:
+                  nullable: true
+                  example: null
+                slug:
+                  type: string
+                  example: electronics
+                sortOrder:
+                  type: number
+                  example: 0
+            examples:
+              Create Category:
+                value:
+                  isActive: true
+                  name: Electronics
+                  parentId: null
+                  slug: electronics
+                  sortOrder: 0
+      responses:
+        '200':
+          description: ''
+  /api/admin/categories/{id}:
+    delete:
+      tags:
+        - Admin - Categories
+      summary: Delete Category
+      description: Delete Category
+      operationId: deleteCategory
+      responses:
+        '200':
+          description: ''
+    patch:
+      tags:
+        - Admin - Categories
+      summary: Update Category
+      description: Update Category
+      operationId: updateCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isActive:
+                  type: boolean
+                  example: true
+                name:
+                  type: string
+                  example: Updated Category Name
+            examples:
+              Update Category:
+                value:
+                  isActive: true
+                  name: Updated Category Name
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/categories/import-excel:
+    post:
+      tags:
+        - Admin - Categories
+      summary: Import Categories from Excel
+      description: Import Categories from Excel
+      operationId: importCategoriesFromExcel
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  example: ''
+      responses:
+        '200':
+          description: ''
+  /api/admin/filters:
+    get:
+      tags:
+        - Admin - Filters
+      summary: Get All Filters
+      description: Get All Filters
+      operationId: getAllFilters
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Admin - Filters
+      summary: Create Filter
+      description: Create Filter
+      operationId: createFilter
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                isActive:
+                  type: string
+                  example: 'true'
+                name:
+                  type: string
+                  example: Brand
+                slug:
+                  type: string
+                  example: brand
+      responses:
+        '200':
+          description: ''
+  /api/admin/filters/{id}:
+    delete:
+      tags:
+        - Admin - Filters
+      summary: Delete Filter
+      description: Delete Filter
+      operationId: deleteFilter
+      responses:
+        '200':
+          description: ''
+    patch:
+      tags:
+        - Admin - Filters
+      summary: Update Filter
+      description: Update Filter
+      operationId: updateFilter
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                isActive:
+                  type: string
+                  example: 'true'
+                name:
+                  type: string
+                  example: Updated Brand
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/filters/import-excel:
+    post:
+      tags:
+        - Admin - Filters
+      summary: Import Filters from Excel
+      description: Import Filters from Excel
+      operationId: importFiltersFromExcel
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  example: ''
+      responses:
+        '200':
+          description: ''
+  /api/admin/category-filters:
+    post:
+      tags:
+        - Admin - Category Filters Assignment
+      summary: Assign Filters to Category
+      description: Assign Filters to Category
+      operationId: assignFiltersToCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                categoryId:
+                  type: string
+                  example: 507f1f77bcf86cd799439011
+                filterIds:
+                  type: array
+                  items:
+                    type: string
+                    example: 507f1f77bcf86cd799439012
+                  example:
+                    - 507f1f77bcf86cd799439012
+                    - 507f1f77bcf86cd799439013
+            examples:
+              Assign Filters to Category:
+                value:
+                  categoryId: 507f1f77bcf86cd799439011
+                  filterIds:
+                    - 507f1f77bcf86cd799439012
+                    - 507f1f77bcf86cd799439013
+      responses:
+        '200':
+          description: ''
+  /api/admin/category-filters/{categoryId}:
+    get:
+      tags:
+        - Admin - Category Filters Assignment
+      summary: Get Filters by Category
+      description: Get Filters by Category
+      operationId: getFiltersByCategory
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/dealers:
+    get:
+      tags:
+        - Admin - Dealers
+      summary: Get All Dealers
+      description: Get All Dealers
+      operationId: getAllDealers
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Admin - Dealers
+      summary: Create Dealer
+      description: Create Dealer
+      operationId: createDealer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                dealer_email:
+                  type: string
+                  example: contact@dubaimotors.com
+                dealer_mobile:
+                  type: string
+                  example: '+971501234567'
+                dealer_name:
+                  type: string
+                  example: Dubai Motors
+                status:
+                  type: string
+                  example: 'true'
+      responses:
+        '200':
+          description: ''
+  /api/admin/dealers/{id}:
+    delete:
+      tags:
+        - Admin - Dealers
+      summary: Delete Dealer
+      description: Delete Dealer
+      operationId: deleteDealer
+      responses:
+        '200':
+          description: ''
+    patch:
+      tags:
+        - Admin - Dealers
+      summary: Update Dealer
+      description: Update Dealer
+      operationId: updateDealer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                dealer_name:
+                  type: string
+                  example: Dubai Motors - Updated
+                status:
+                  type: string
+                  example: 'true'
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/dealers/{id}/status:
+    put:
+      tags:
+        - Admin - Dealers
+      summary: Update Dealer Status
+      description: Update Dealer Status
+      operationId: updateDealerStatus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  example: false
+            examples:
+              Update Dealer Status:
+                value:
+                  status: false
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/roles:
+    get:
+      tags:
+        - Admin - Roles & Permissions
+      summary: Get All Roles
+      description: Get All Roles
+      operationId: getAllRoles
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Admin - Roles & Permissions
+      summary: Create Role
+      description: Create Role
+      operationId: createRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  example: Can moderate content
+                role_name:
+                  type: string
+                  example: Content Moderator
+                status:
+                  type: string
+                  example: active
+            examples:
+              Create Role:
+                value:
+                  description: Can moderate content
+                  role_name: Content Moderator
+                  status: active
+      responses:
+        '200':
+          description: ''
+  /api/admin/roles/{id}:
+    delete:
+      tags:
+        - Admin - Roles & Permissions
+      summary: Delete Role
+      description: Delete Role
+      operationId: deleteRole
+      responses:
+        '200':
+          description: ''
+    patch:
+      tags:
+        - Admin - Roles & Permissions
+      summary: Update Role
+      description: Update Role
+      operationId: updateRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_name:
+                  type: string
+                  example: Senior Moderator
+                status:
+                  type: string
+                  example: active
+            examples:
+              Update Role:
+                value:
+                  role_name: Senior Moderator
+                  status: active
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/roles/{id}/permissions:
+    put:
+      tags:
+        - Admin - Roles & Permissions
+      summary: Set Role Permissions
+      description: Set Role Permissions
+      operationId: setRolePermissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                permissions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      can_create:
+                        type: boolean
+                        example: false
+                      can_delete:
+                        type: boolean
+                        example: false
+                      can_edit:
+                        type: boolean
+                        example: false
+                      can_view:
+                        type: boolean
+                        example: true
+                      module_name:
+                        type: string
+                        example: Dashboard
+                  example:
+                    - can_create: false
+                      can_delete: false
+                      can_edit: false
+                      can_view: true
+                      module_name: Dashboard
+                    - can_create: false
+                      can_delete: false
+                      can_edit: true
+                      can_view: true
+                      module_name: Listings
+            examples:
+              Set Role Permissions:
+                value:
+                  permissions:
+                    - can_create: false
+                      can_delete: false
+                      can_edit: false
+                      can_view: true
+                      module_name: Dashboard
+                    - can_create: false
+                      can_delete: false
+                      can_edit: true
+                      can_view: true
+                      module_name: Listings
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/admin/reported-comments:
+    get:
+      tags:
+        - Admin - Reported Comments
+      summary: Get Reported Comments
+      description: Get Reported Comments
+      operationId: getReportedComments
+      responses:
+        '200':
+          description: ''
+  /api/admin/reported-comments/comment/{commentId}/action:
+    put:
+      tags:
+        - Admin - Reported Comments
+      summary: Take Action on Reported Comment
+      description: Take Action on Reported Comment
+      operationId: takeActionOnReportedComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  example: deactivate
+            examples:
+              Take Action on Reported Comment:
+                value:
+                  action: deactivate
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: commentId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ''
+  /api/discovery/search:
+    get:
+      tags:
+        - Public / Discovery
+      summary: Search Products
+      description: Search Products
+      operationId: searchProducts
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+            example: toyota
+        - name: category
+          in: query
+          schema:
+            type: string
+            example: motors
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+      responses:
+        '200':
+          description: ''
+  /api/discovery/categories:
+    get:
+      tags:
+        - Public / Discovery
+      summary: Get Categories List
+      description: Get Categories List
+      operationId: getCategoriesList
+      responses:
+        '200':
+          description: ''
+  /api/discovery/reels:
+    get:
+      tags:
+        - Public / Discovery
+      summary: Get Reels Feed
+      description: Get Reels Feed
+      operationId: getReelsFeed
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: string
+            example: '10'
+      responses:
+        '200':
+          description: ''
+tags:
+  - name: Health & System
+  - name: Authentication
+  - name: User Profile
+  - name: Products / Listings
+  - name: Product Interactions
+  - name: Comments
+  - name: User Interactions
+  - name: Chats & Messaging
+  - name: AI & Video Processing
+  - name: Admin - Products Management
+  - name: Admin - Users Management
+  - name: Admin - Categories
+  - name: Admin - Filters
+  - name: Admin - Category Filters Assignment
+  - name: Admin - Dealers
+  - name: Admin - Roles & Permissions
+  - name: Admin - Reported Comments
+  - name: Public / Discovery
+
