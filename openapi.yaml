@@ -7,7 +7,7 @@ info:
   version: 1.0.0
   contact: {}
 servers:
-  - url: http://localhost:5002
+  - url: http://117.254.196.100:5002/api
 paths:
   /api/health:
     get:
